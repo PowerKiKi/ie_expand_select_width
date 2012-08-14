@@ -10,14 +10,26 @@
     <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
 
     <script type="text/javascript" src="javascripts/modernizr.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
     <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript" src="javascripts/ie_expand_select_width.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
         $('#main_content').headsmart()
+		
+		$('#s7').bind('click mousedown mouseover mouseout focus blur change', function(e) {
+			var box = $('textarea');
+			box.val(new Date().getTime()  + ' ' + e.type + '\n' + box.val() );
+		});
       })
     </script>
-    <title>Ie expand select width by PowerKiKi</title>
+    <title>IE8 expand select width by PowerKiKi</title>
+	
+		<style>
+			textarea {width: 100%; height: 5em;}
+			select {width: 15em;}
+		</style>
   </head>
 
   <body>
@@ -27,7 +39,7 @@
       <header>
         <span class="ribbon-outer">
           <span class="ribbon-inner">
-            <h1>Ie expand select width</h1>
+            <h1>IE8 expand select width</h1>
             <h2></h2>
           </span>
           <span class="left-tail"></span>
@@ -46,32 +58,114 @@
 
 
       <section id="main_content">
-        <h3>Welcome to GitHub Pages.</h3>
+		  
+		<h1>Introduction</h1>
+		
+		<p>This page demonstrate the use ie_select_fixed to fix select box width issue on IE8. </p>
+		
+		
+		<h2>Usage</h2>
+		Include the script only for IE:
+		<pre>&lt;!--[if lt IE 9]&gt;
+&lt;script src=&quot;ie_expand_select_width.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;</pre>
+		
+		
+		
+		<h1>Demo</h1>
+		<h3>Simple</h3>
+		<select id="s0">
+			<option>s0: no label, short</option>
+			<option>s0: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+			<option label="s0: my short label" >this text will not appear</option>
+			<option label="s0: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+		</select>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+		<h3>Within text</h3>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+			<select id="s1">
+				<option>s1: no label, short</option>
+				<option>s1: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+				<option label="s1: my short label" >this text will not appear</option>
+				<option label="s1: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+			</select>
+			Sed diam enim, pharetra ac tempus eu, ullamcorper a nibh. Etiam dui urna,
+			adipiscing fermentum semper sit amet, molestie nec tortor.
+			<select id="s2">
+				<option>s2: no label, short</option>
+				<option>s2: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+				<option label="s2: my short label" >this text will not appear</option>
+				<option label="s2: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+			</select>
+			<select id="s3">
+				<option>s3: no label, short</option>
+				<option>s3: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+				<option label="s3: my short label" >this text will not appear</option>
+				<option label="s3: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+			</select>
+			accumsan ullamcorper. Nam sem lorem, pellentesque nec molestie eu, luctus quis sem.
+			Maecenas ac dolor eu nunc posuere semper. 
+		</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+		<h3>Within table</h3>
+		<table>
+			<tr>
+				<td>
+					<select id="s4">
+						<option>s4: no label, short</option>
+						<option>s4: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+						<option label="s4: my short label" >this text will not appear</option>
+						<option label="s4: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+					</select>
+				</td>
+				<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+			</tr>
+			<tr>
+				<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+				<td>
+					<select id="s5">
+						<option>s5: no label, short</option>
+						<option>s5: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+						<option label="s5: my short label" >this text will not appear</option>
+						<option label="s5: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+					</select>
+				</td>
+			</tr>
+		</table>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+		<h3>Do not shorten</h3>
+		<p>
+			<select id="s6">
+				<option>s6: only short 1</option>
+				<option>s6: only short 2</option>
+				<option>s6: only short 3</option>
+			</select>
+		</p>
 
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+		<h3>Do not break other events</h3>
+		<textarea></textarea>
+		<select id="s7">
+			<option>s7: no label, short</option>
+			<option>s7: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+			<option label="s7: my short label" >this text will not appear</option>
+			<option label="s7: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+		</select>
+		
+		<h3>Custom style</h3>
+		<p style="background: grey; ">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sem lorem, pellentesque nec molestie eu, luctus quis sem.
+			Maecenas ac dolor eu nunc posuere semper. 
+			<select id="s8" style="padding: 1em; margin: 1em; border: 0.5em red solid; ">
+				<option>s8: no label, short</option>
+				<option>s8: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+				<option label="s8: my short label" >this text will not appear</option>
+				<option label="s8: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+			</select>
+			Sed diam enim, pharetra ac tempus eu, ullamcorper a nibh. Etiam dui urna,
+			adipiscing fermentum semper sit amet, molestie nec tortor.
+		</p>
+		  
+		  
       </section>
 
       <footer>
