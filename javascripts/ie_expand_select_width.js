@@ -4,32 +4,22 @@
 (function( $ ){ 
 
 	$.fn.ieExpandSelectWidth = function() {
-		$('html > head').append('<style>select.ie_expand_select_width { width: auto; }</style>');
-
 		this.filter('select')
-		.bind('mouseenter focus',function(){
-			open($(this));
-		})
-		.bind('blur change', function(){
-			close($(this));
-		})
-		.bind('mouseleave', function(){
-			if (!$(this).is(':focus'))
-				close($(this));
+		.bind('mouseenter focus',function(event){
+			open($(this), event.type == 'mouseenter');
 		});
 
 		return this;
 	};
 	
-
 	/**
 	 * Open the expanded select
 	 * @param select jQuery object for the original select element
 	 */
-	function open(select)
+	function open(select, openedViaMouse)
 	{
 		// Allow only one select to be opened at any given time
-		if ($.data(document.body, 'ie_expand_select_width_lock') || select.is('.ie_expand_select_width') || $('.ie_expand_select_width_clone').length)
+		if ($.data(document.body, 'ie_expand_select_width_lock') || select.is('.ie_expand_select_width'))
 		{
 			return;
 		}
@@ -37,29 +27,52 @@
 
 		// Clone the select to keep the layout intact
 		var selectClone = select.clone();
-		selectClone.addClass('ie_expand_select_width_clone');
-		selectClone.css('visibility', 'hidden');
-
-		// Insert the clone instead of original's position
-		select.before(selectClone);
+		selectClone.val(select.val());
 		
-		// Move the original as an overlay on top of the clone
-		select.appendTo('body');
-		select.position({
-			my : 'left',
-			at : 'left',
-			of : selectClone
-		});
+		var style = getComputedStyleMap(select);
+		style['min-width'] = style['width']; // Cannot be shorter than current width
+		style['width'] = 'auto';
+		style['z-index'] = 9999; // be sure it's always on top of everything else
+		selectClone.css(style);
+
+		// Insert the clone at the very end of document, so it does not break layout
+		selectClone.appendTo('body');
 		
-		// Prevent shortening and be sure it's always on top of everything else
-		select.css({
-			'min-width': select.width(),
-			'z-index': 999
+		// Move the clone as an overlay on top of the original
+		reposition(select, selectClone);
+		
+		if (!openedViaMouse)
+		{
+			selectClone.focus();
+		}
+		
+		// Bind events to close
+		selectClone
+		.bind('keydown keyup', function(event){
+			selectClone.data('ie_expand_select_width_key_is_down', event.type == 'keydown');
+		})
+		.bind('mousedown mouseup', function(event){
+			selectClone.data('ie_expand_select_width_mouse_is_down', event.type == 'mousedown');
+		})
+		.bind('blur', function(){
+			close(select, selectClone);
+		})
+		.bind('change', function(){
+			// Only close if the change was made via mouse
+			if (!selectClone.data('ie_expand_select_width_key_is_down'))
+				close(select, selectClone);
 		});
 
-		select.addClass('ie_expand_select_width');
-		select.data('ie_expand_select_width_clone', selectClone);
-		$(window).bind('resize.ie_expand_select_width', reposition);
+		// Only close if we are doing a simple hover and not an a choice in a expanded select
+		if (openedViaMouse)
+		{
+			selectClone.bind('mouseleave', function(){
+				if (!selectClone.is(':focus'))
+					close(select, selectClone);
+			});
+		}
+		
+		$(window).bind('resize.ie_expand_select_width', function() { reposition(select, selectClone); });
 
 		$.data(document.body, 'ie_expand_select_width_lock', false);
 	}
@@ -68,17 +81,16 @@
 	 * Close the expanded select
 	 * @param select jQuery object for the original select element
 	 */
-	function close(select)
+	function close(select, selectClone)
 	{
-		var selectClone = select.data('ie_expand_select_width_clone');
 		if (!selectClone || $.data(document.body, 'ie_expand_select_width_lock'))
 		{
 			return;
 		}
 		
 		select.removeClass('ie_expand_select_width');
-		select.css('position', 'static');
-		selectClone.replaceWith(select);
+		select.val(selectClone.val());
+		selectClone.remove();
 		select.data('ie_expand_select_width_clone', null);
 		
 		$(window).unbind('resize.ie_expand_select_width');
@@ -87,19 +99,40 @@
 	/**
 	 * Reposition overlays on top of their clones
 	 */
-	function reposition()
+	function reposition(select, selectClone)
 	{
-		$('select.ie_expand_select_width').each(function(i, s) {
-			var select = $(s);
-			var selectClone = select.data('ie_expand_select_width_clone');
-			if (selectClone)
-			{
-				select.position({
-					my : 'left',
-					at : 'left',
-					of : selectClone
-				});
-			}
+		// Move the clone as an overlay on top of the original
+		selectClone.position({
+			my : 'left',
+			at : 'left',
+			of : select,
+			collision: 'none'
 		});
 	}
+	
+	/**
+	 * Returns a map of computed CSS style for the fiven element
+	 * Highly inspired from http://stackoverflow.com/a/6416477/37706
+	 */
+	function getComputedStyleMap(element) {
+		var dom = element.get(0);
+		var style;
+		var result = {};
+		if (window.getComputedStyle) {
+			style = window.getComputedStyle(dom, null);
+			for (var i = 0; i < style.length; i++) {
+				var prop = style[i];
+				result[prop] = style.getPropertyValue(prop);
+			}
+		}
+		else if (dom.currentStyle) {
+			style = dom.currentStyle;
+			for(var prop in style) {
+				result[prop] = style[prop];
+			}
+		}
+		
+		return result;
+	}
+	
 })( jQuery );

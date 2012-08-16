@@ -1,75 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=640" />
+	<head>
+		<meta charset='utf-8'>
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="viewport" content="width=640" />
 
-    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
-    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+		<link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+		<link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+		<link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
 
-    <script type="text/javascript" src="javascripts/modernizr.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
-    <script type="text/javascript" src="javascripts/ie_expand_select_width.js"></script>
-    <script type="text/javascript">
+		<script type="text/javascript" src="javascripts/modernizr.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+		<script type="text/javascript" src="javascripts/ie_expand_select_width.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('#main_content').headsmart();
+				$('select').ieExpandSelectWidth();
 		
-      $(document).ready(function () {
-        $('#main_content').headsmart();
-		$('select').ieExpandSelectWidth();
+				$('#s7').bind('blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error', function(e) {
+					var box = $('textarea');
+					box.val(new Date().getTime()  + ' ' + e.type + '\n' + box.val() );
+				});
 		
-		$('#s7').bind('blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error', function(e) {
-			var box = $('textarea');
-			box.val(new Date().getTime()  + ' ' + e.type + '\n' + box.val() );
-		});
-		
-      })
-    </script>
-    <title>IE8 expand select width by PowerKiKi</title>
-	
+			})
+		</script>
+		<title>IE8 expand select width by PowerKiKi</title>
+
 		<style>
 			textarea {width: 100%; height: 15em;}
 			select {width: 15em;}
+			p.custom_style { background: grey; } 
+			p.custom_style select { font-size: 1.3em; }
 		</style>
-  </head>
+	</head>
 
-  <body>
-    <a id="forkme_banner" href="https://github.com/PowerKiKi/ie_expand_select_width">View on GitHub</a>
-    <div class="shell">
+	<body>
+		<a id="forkme_banner" href="https://github.com/PowerKiKi/ie_expand_select_width">View on GitHub</a>
+		<div class="shell">
 
-      <header>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <h1>IE8 expand select width</h1>
-            <h2></h2>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-      </header>
+			<header>
+				<span class="ribbon-outer">
+					<span class="ribbon-inner">
+						<h1>IE8 expand select width</h1>
+						<h2></h2>
+					</span>
+					<span class="left-tail"></span>
+					<span class="right-tail"></span>
+				</span>
+			</header>
 
-      <section id="downloads">
-        <span class="inner">
-          <a href="https://github.com/PowerKiKi/ie_expand_select_width/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/PowerKiKi/ie_expand_select_width/tarball/master" class="tgz"><em>download</em> .TGZ</a>
-        </span>
-      </section>
-
-
-      <span class="banner-fix"></span>
+			<section id="downloads">
+				<span class="inner">
+					<a href="https://github.com/PowerKiKi/ie_expand_select_width/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/PowerKiKi/ie_expand_select_width/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+				</span>
+			</section>
 
 
-      <section id="main_content">
-		  
-		<h1>Introduction</h1>
-		
-		<p>This page demonstrate the use of ie_expand_select_width to fix select box width issue on IE8. For demo purpose the script is active for all browsers, but in production it should only be active for IE8. Because its behavior will be slightly different (poorer) on other browsers.</p>
-		<p>Contrary to several other solutions, this script keep the page layout intact.</p>
-		
-		<h2>Usage</h2>
-		Include the script only for IE:
-		<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js&quot;&gt;&lt;/script&gt;
+			<span class="banner-fix"></span>
+
+
+			<section id="main_content">
+
+				<h1>Introduction</h1>
+
+				<p>This page demonstrate the use of ie_expand_select_width to fix select box width issue on IE8. For demo purpose the script is active for all browsers, but in production it should only be active for IE8. Because its behavior will be slightly different (poorer) on other browsers.</p>
+				<p>Contrary to several other solutions, this script keep the page layout intact.</p>
+
+				<h2>Usage</h2>
+				Include the script only for IE:
+				<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
 &lt;!--[if lt IE 9]&gt;
 	&lt;script type=&quot;text/javascript&quot; src=&quot;ie_expand_select_width.js&quot;&gt;&lt;/script&gt;
@@ -79,119 +80,118 @@
 		});
 	&lt;/script&gt;
 &lt;![endif]--&gt;</pre>
-		
-		
-		
-		<h1>Demo</h1>
-		<h3>Simple</h3>
-		<select id="s0">
-			<option>s0: no label, short</option>
-			<option>s0: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
-			<option label="s0: my short label" >this text will not appear</option>
-			<option label="s0: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
-		</select>
 
-		<h3>Within text</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-			<select id="s1">
-				<option>s1: no label, short</option>
-				<option>s1: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
-				<option label="s1: my short label" >this text will not appear</option>
-				<option label="s1: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
-			</select>
-			Sed diam enim, pharetra ac tempus eu, ullamcorper a nibh. Etiam dui urna,
-			adipiscing fermentum semper sit amet, molestie nec tortor.
-			<select id="s2">
-				<option>s2: no label, short</option>
-				<option>s2: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
-				<option label="s2: my short label" >this text will not appear</option>
-				<option label="s2: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
-			</select>
-			<select id="s3">
-				<option>s3: no label, short</option>
-				<option>s3: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
-				<option label="s3: my short label" >this text will not appear</option>
-				<option label="s3: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
-			</select>
-			accumsan ullamcorper. Nam sem lorem, pellentesque nec molestie eu, luctus quis sem.
-			Maecenas ac dolor eu nunc posuere semper. 
-		</p>
 
-		<h3>Within table</h3>
-		<table>
-			<tr>
-				<td>
-					<select id="s4">
-						<option>s4: no label, short</option>
-						<option>s4: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
-						<option label="s4: my short label" >this text will not appear</option>
-						<option label="s4: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+
+				<h1>Demo</h1>
+				<h3>Simple</h3>
+				<select id="s0">
+					<option>s0: no label, short</option>
+					<option>s0: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+					<option label="s0: my short label" >this text will not appear</option>
+					<option label="s0: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+				</select>
+
+				<h3>Within text</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					<select id="s1">
+						<option>s1: no label, short</option>
+						<option>s1: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+						<option label="s1: my short label" >this text will not appear</option>
+						<option label="s1: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
 					</select>
-				</td>
-				<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-			</tr>
-			<tr>
-				<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-				<td>
-					<select id="s5">
-						<option>s5: no label, short</option>
-						<option>s5: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
-						<option label="s5: my short label" >this text will not appear</option>
-						<option label="s5: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+					Sed diam enim, pharetra ac tempus eu, ullamcorper a nibh. Etiam dui urna,
+					adipiscing fermentum semper sit amet, molestie nec tortor.
+					<select id="s2">
+						<option>s2: no label, short</option>
+						<option>s2: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+						<option label="s2: my short label" >this text will not appear</option>
+						<option label="s2: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
 					</select>
-				</td>
-			</tr>
-		</table>
+					<select id="s3">
+						<option>s3: no label, short</option>
+						<option>s3: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+						<option label="s3: my short label" >this text will not appear</option>
+						<option label="s3: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+					</select>
+					accumsan ullamcorper. Nam sem lorem, pellentesque nec molestie eu, luctus quis sem.
+					Maecenas ac dolor eu nunc posuere semper. 
+				</p>
 
-		<h3>Do not shorten</h3>
-		<p>
-			<select id="s6">
-				<option>s6: only short 1</option>
-				<option>s6: only short 2</option>
-				<option>s6: only short 3</option>
-			</select>
-		</p>
+				<h3>Within table</h3>
+				<table>
+					<tr>
+						<td>
+							<select id="s4">
+								<option>s4: no label, short</option>
+								<option>s4: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+								<option label="s4: my short label" >this text will not appear</option>
+								<option label="s4: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+							</select>
+						</td>
+						<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+						<td>
+							<select id="s5">
+								<option>s5: no label, short</option>
+								<option>s5: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+								<option label="s5: my short label" >this text will not appear</option>
+								<option label="s5: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+							</select>
+						</td>
+					</tr>
+				</table>
 
-		<h3>Do not break other events</h3>
-		<textarea></textarea>
-		<select id="s7">
-			<option>s7: no label, short</option>
-			<option>s7: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
-			<option label="s7: my short label" >this text will not appear</option>
-			<option label="s7: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
-		</select>
-		
-		<h3>Custom style</h3>
-		<p style="background: grey; ">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sem lorem, pellentesque nec molestie eu, luctus quis sem.
-			Maecenas ac dolor eu nunc posuere semper. 
-			<select id="s8" style="padding: 1em; margin: 2em; border: 1em red solid; ">
-				<option>s8: no label, short</option>
-				<option>s8: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
-				<option label="s8: my short label" >this text will not appear</option>
-				<option label="s8: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
-			</select>
-			Sed diam enim, pharetra ac tempus eu, ullamcorper a nibh. Etiam dui urna,
-			adipiscing fermentum semper sit amet, molestie nec tortor.
-		</p>
-		  
-		  
-      </section>
+				<h3>Do not shorten</h3>
+				<p>
+					<select id="s6">
+						<option>s6: only short 1</option>
+						<option>s6: only short 2</option>
+						<option>s6: only short 3</option>
+					</select>
+				</p>
 
-      <footer>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <p>this project by <a href="https://github.com/PowerKiKi">PowerKiKi</a> can be found on <a href="https://github.com/PowerKiKi/ie_expand_select_width">GitHub</a></p>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
-        <span class="octocat"></span>
-      </footer>
+				<h3>Do not break other events</h3>
+				<textarea></textarea>
+				<select id="s7">
+					<option>s7: no label, short</option>
+					<option>s7: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+					<option label="s7: my short label" >this text will not appear</option>
+					<option label="s7: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+				</select>
 
-    </div>
+				<h3>Custom style</h3>
+				<p class="custom_style">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sem lorem, pellentesque nec molestie eu, luctus quis sem.
+					Maecenas ac dolor eu nunc posuere semper. 
+					<select id="s8" style="padding: 1em; margin: 2em; border: 1em red solid; ">
+						<option>s8: no label, short</option>
+						<option>s8: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+						<option label="s8: my short label" >this text will not appear</option>
+						<option label="s8: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear</option>
+					</select>
+					Sed diam enim, pharetra ac tempus eu, ullamcorper a nibh. Etiam dui urna,
+					adipiscing fermentum semper sit amet, molestie nec tortor.
+				</p>
 
-    
-  </body>
+
+			</section>
+
+			<footer>
+				<span class="ribbon-outer">
+					<span class="ribbon-inner">
+						<p>this project by <a href="https://github.com/PowerKiKi">PowerKiKi</a> can be found on <a href="https://github.com/PowerKiKi/ie_expand_select_width">GitHub</a></p>
+					</span>
+					<span class="left-tail"></span>
+					<span class="right-tail"></span>
+				</span>
+				<p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+				<span class="octocat"></span>
+			</footer>
+
+		</div>
+
+	</body>
 </html>
