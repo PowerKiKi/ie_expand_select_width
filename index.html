@@ -15,14 +15,16 @@
     <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
     <script type="text/javascript" src="javascripts/ie_expand_select_width.js"></script>
     <script type="text/javascript">
+		
       $(document).ready(function () {
         $('#main_content').headsmart();
+		$('select').ieExpandSelectWidth();
 		
 		$('#s7').bind('blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error', function(e) {
 			var box = $('textarea');
 			box.val(new Date().getTime()  + ' ' + e.type + '\n' + box.val() );
 		});
-
+		
       })
     </script>
     <title>IE8 expand select width by PowerKiKi</title>
@@ -62,13 +64,20 @@
 		  
 		<h1>Introduction</h1>
 		
-		<p>This page demonstrate the use ie_select_fixed to fix select box width issue on IE8. </p>
-		
+		<p>This page demonstrate the use of ie_expand_select_width to fix select box width issue on IE8. For demo purpose the script is active for all browsers, but in production it should only be active for IE8. Because its behavior will be slightly different (poorer) on other browsers.</p>
+		<p>Contrary to several other solutions, this script keep the page layout intact.</p>
 		
 		<h2>Usage</h2>
 		Include the script only for IE:
-		<pre>&lt;!--[if lt IE 9]&gt;
-&lt;script src=&quot;ie_expand_select_width.js&quot;&gt;&lt;/script&gt;
+		<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
+&lt;!--[if lt IE 9]&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;ie_expand_select_width.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot;&gt;
+		$(document).ready(function() {
+			$('select').ieExpandSelectWidth();
+		});
+	&lt;/script&gt;
 &lt;![endif]--&gt;</pre>
 		
 		
