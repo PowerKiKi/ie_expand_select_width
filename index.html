@@ -16,18 +16,19 @@
     <script type="text/javascript" src="javascripts/ie_expand_select_width.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
-        $('#main_content').headsmart()
+        $('#main_content').headsmart();
 		
-		$('#s7').bind('click mousedown mouseover mouseout focus blur change', function(e) {
+		$('#s7').bind('blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error', function(e) {
 			var box = $('textarea');
 			box.val(new Date().getTime()  + ' ' + e.type + '\n' + box.val() );
 		});
+
       })
     </script>
     <title>IE8 expand select width by PowerKiKi</title>
 	
 		<style>
-			textarea {width: 100%; height: 5em;}
+			textarea {width: 100%; height: 15em;}
 			select {width: 15em;}
 		</style>
   </head>
@@ -155,7 +156,7 @@
 		<p style="background: grey; ">
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sem lorem, pellentesque nec molestie eu, luctus quis sem.
 			Maecenas ac dolor eu nunc posuere semper. 
-			<select id="s8" style="padding: 1em; margin: 1em; border: 0.5em red solid; ">
+			<select id="s8" style="padding: 1em; margin: 2em; border: 1em red solid; ">
 				<option>s8: no label, short</option>
 				<option>s8: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
 				<option label="s8: my short label" >this text will not appear</option>

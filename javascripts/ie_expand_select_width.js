@@ -13,6 +13,7 @@ $(document).ready(function(){
 		// Clone the select to keep the layout intact
 		var selectClone = select.clone();
 		selectClone.addClass('ie_fixed_select_clone');
+		selectClone.css('visibility', 'hidden');
 
 		// Insert the clone instead of original's position
 		select.before(selectClone);
@@ -43,7 +44,7 @@ $(document).ready(function(){
 		{
 			return;
 		}
-
+		
 		select.removeClass('ie_fixed_select');
 		select.css('position', 'static');
 		selectClone.replaceWith(select);
@@ -53,13 +54,13 @@ $(document).ready(function(){
 	$('html > head').append('<style>select.ie_fixed_select { width: auto; }</style>');
 
 	$("select")
-	.bind("mouseover",function(){
+	.bind("mouseenter focus",function(){
 		open($(this));
 	})
 	.bind("blur change", function(){
 		close($(this));
 	})
-	.bind("mouseout", function(){
+	.bind("mouseleave", function(){
 		if (!$(this).is(':focus'))
 			close($(this));
 	});
