@@ -19,7 +19,11 @@
 	function open(select, openedViaMouse)
 	{
 		// Allow only one select to be opened at any given time
-		if ($.data(document.body, 'ie_expand_select_width_lock') || select.is('.ie_expand_select_width'))
+		// and only select in 'single choice' mode
+		if ($.data(document.body, 'ie_expand_select_width_lock')
+			|| select.is('.ie_expand_select_width')
+			|| select.attr('multiple')
+			|| select.attr('size') > 1)
 		{
 			return;
 		}
