@@ -15,10 +15,11 @@
 	/**
 	 * Open the expanded select
 	 * @param select jQuery object for the original select element
+	 * @param openedViaMouse boolean whether the open was initiated via mouse or keyboard
 	 */
 	function open(select, openedViaMouse)
 	{
-		// Allow only one select to be opened at any given time
+		// Allow only one clone for one select to be opened at any given time
 		// and only select in 'single choice' mode
 		if ($.data(document.body, 'ie_expand_select_width_lock')
 			|| select.data('ie_expand_select_width_clone')
@@ -78,6 +79,9 @@
 		}
 		
 		$(window).bind('resize.ie_expand_select_width', function() { reposition(select, selectClone); });
+		
+		// Remember we are the last select to have been cloned
+		$.data(document.body, 'ie_expand_select_width_last_select', select);
 
 		$.data(document.body, 'ie_expand_select_width_lock', false);
 	}
@@ -85,6 +89,7 @@
 	/**
 	 * Close the expanded select
 	 * @param select jQuery object for the original select element
+	 * @param selectClone jQuery object for the cloned select element
 	 */
 	function close(select, selectClone)
 	{
@@ -101,11 +106,22 @@
 		selectClone.remove();
 		select.data('ie_expand_select_width_clone', null);
 		
+		// If we are closing because another select opened, then we need
+		// to reposition that second select's clone after destroying our clone
+		var lastSelect = $.data(document.body, 'ie_expand_select_width_last_select');
+		if (lastSelect)
+		{
+			lastSelectClone = lastSelect.data('ie_expand_select_width_clone');
+			reposition(lastSelect, lastSelectClone);
+		}
+		
 		$(window).unbind('resize.ie_expand_select_width');
 	}
 	
 	/**
 	 * Reposition overlays on top of their clones
+	 * @param select jQuery object for the original select element
+	 * @param selectClone jQuery object for the cloned select element
 	 */
 	function reposition(select, selectClone)
 	{
