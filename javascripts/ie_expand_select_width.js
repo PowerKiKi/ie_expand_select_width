@@ -70,7 +70,7 @@
 		// Only close if we are doing a simple hover and not an a choice in a expanded select
 		if (openedViaMouse)
 		{
-			selectClone.bind('mouseleave', function(){
+			selectClone.bind('mouseleave', function() {
 				if (!selectClone.is(':focus'))
 					close(select, selectClone);
 			});
@@ -93,7 +93,12 @@
 		}
 		
 		select.removeClass('ie_expand_select_width');
-		select.val(selectClone.val()).change();
+		
+		// Update value if different
+		var cloneValue = selectClone.val();
+		if (cloneValue != select.val())
+			select.val(cloneValue).change();
+		
 		selectClone.remove();
 		select.data('ie_expand_select_width_clone', null);
 		
