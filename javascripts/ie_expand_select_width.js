@@ -21,7 +21,7 @@
 		// Allow only one select to be opened at any given time
 		// and only select in 'single choice' mode
 		if ($.data(document.body, 'ie_expand_select_width_lock')
-			|| select.is('.ie_expand_select_width')
+			|| select.data('ie_expand_select_width_clone')
 			|| select.attr('multiple')
 			|| select.attr('size') > 1)
 		{
@@ -32,6 +32,7 @@
 		// Clone the select to keep the layout intact
 		var selectClone = select.clone();
 		selectClone.val(select.val());
+		select.data('ie_expand_select_width_clone', selectClone);
 		
 		var style = getComputedStyleMap(select);
 		style['min-width'] = select.width(); // Cannot be shorter than current width
@@ -91,8 +92,6 @@
 		{
 			return;
 		}
-		
-		select.removeClass('ie_expand_select_width');
 		
 		// Update value if different
 		var cloneValue = selectClone.val();
