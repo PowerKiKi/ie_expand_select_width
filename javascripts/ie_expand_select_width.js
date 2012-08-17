@@ -89,7 +89,7 @@
 		}
 		
 		select.removeClass('ie_expand_select_width');
-		select.val(selectClone.val());
+		select.val(selectClone.val()).change();
 		selectClone.remove();
 		select.data('ie_expand_select_width_clone', null);
 		
