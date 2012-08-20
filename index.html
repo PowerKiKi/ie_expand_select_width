@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset='utf-8'>
-		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=640" />
 
 		<link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
@@ -178,10 +178,11 @@
 
 				<h3>100% width does not expand too much</h3>
 				<div style="width: 50%; background: grey; padding: 1em; ">
-					Constrained container
 					<select id="s9" style="width: 100%; ">
 						<option>s9: no label, short</option>
+						<option>s9: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
 						<option label="s9: my short label" >this text will not appear</option>
+						<option label="s9: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear either</option>
 					</select>
 				</div>
 

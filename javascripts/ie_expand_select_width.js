@@ -2,6 +2,7 @@
  *  https://github.com/PowerKiKi/ie_expand_select_width
  */
 (function( $ ){ 
+	"use strict";
 
 	$.fn.ieExpandSelectWidth = function() {
 		this.filter('select')
@@ -24,7 +25,8 @@
 		if ($.data(document.body, 'ie_expand_select_width_lock')
 			|| select.data('ie_expand_select_width_clone')
 			|| select.attr('multiple')
-			|| select.attr('size') > 1)
+			|| select.attr('size') > 1
+			|| select.data('ie_expand_select_width_ignore'))
 		{
 			return;
 		}
@@ -43,6 +45,16 @@
 
 		// Insert the clone at the very end of document, so it does not break layout
 		selectClone.appendTo('body');
+		
+		// If the clone is actually shorter than original, cancel everything and 
+		// never expand this select anymore
+		if (selectClone.width() <= select.width())
+		{
+			select.data('ie_expand_select_width_ignore', true);
+			$.data(document.body, 'ie_expand_select_width_lock', false);
+			close(select, selectClone);
+			return;
+		}
 		
 		// Move the clone as an overlay on top of the original
 		reposition(select, selectClone);
@@ -111,7 +123,7 @@
 		var lastSelect = $.data(document.body, 'ie_expand_select_width_last_select');
 		if (lastSelect)
 		{
-			lastSelectClone = lastSelect.data('ie_expand_select_width_clone');
+			var lastSelectClone = lastSelect.data('ie_expand_select_width_clone');
 			reposition(lastSelect, lastSelectClone);
 		}
 		
@@ -119,12 +131,15 @@
 	}
 	
 	/**
-	 * Reposition overlays on top of their clones
+	 * Reposition clone on top of its original
 	 * @param select jQuery object for the original select element
 	 * @param selectClone jQuery object for the cloned select element
 	 */
 	function reposition(select, selectClone)
 	{
+		if (!select || !selectClone)
+			return;
+		
 		// Move the clone as an overlay on top of the original
 		selectClone.position({
 			my : 'left',
