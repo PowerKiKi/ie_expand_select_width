@@ -72,7 +72,7 @@
 				Include the script only for IE:
 				<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
-&lt;!--[if lt IE 9]&gt;
+&lt;!--[if IE 8]&gt;
 	&lt;script type=&quot;text/javascript&quot; src=&quot;ie_expand_select_width.js&quot;&gt;&lt;/script&gt;
 	&lt;script type=&quot;text/javascript&quot;&gt;
 		$(document).ready(function() {
@@ -198,6 +198,14 @@
 					<option label="s11: my short label" >this text will not appear</option>
 				</select>
 				
+				<h3>Also expand max-width</h3>
+				<select id="s12" style="max-width: 5em; ">
+					<option>s12: no label, short</option>
+					<option>s12: no label, long: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</option>
+					<option label="s12: my short label" >this text will not appear</option>
+					<option label="s12: my long label: Lorem ipsum dolor sit amet, consectetur adipiscing elit.">this text will not appear either</option>
+				</select>
+
 			</section>
 
 			<footer>

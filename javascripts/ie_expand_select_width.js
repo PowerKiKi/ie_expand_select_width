@@ -39,6 +39,7 @@
 		
 		var style = getComputedStyleMap(select);
 		style['min-width'] = select.width(); // Cannot be shorter than current width
+		style['max-width'] = 'none'; // Can be as long as it needs to be
 		style['width'] = 'auto';
 		style['z-index'] = 9999; // be sure it's always on top of everything else
 		selectClone.css(style);
