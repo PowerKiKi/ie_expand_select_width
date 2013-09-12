@@ -1,0 +1,30 @@
+{
+    "name": "ie_expand_select_width",
+    "title": "IE8 expand select width",
+    "description": "Expand automatically <select> width to be able to read long options in IE8",
+    "keywords": [
+        "ie8",
+        "form",
+        "input",
+        "select",
+        "width"
+    ],
+    "version": "1.0.0",
+    "author": {
+        "name": "PowerKiKi",
+        "url": "https://github.com/PowerKiKi"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/PowerKiKi/ie_expand_select_width/blob/gh-pages/LICENSE.txt"
+        }
+    ],
+    "bugs": "https://github.com/PowerKiKi/ie_expand_select_width/issues",
+    "homepage": "https://github.com/PowerKiKi/ie_expand_select_width/",
+    "demo": "http://powerkiki.github.io/ie_expand_select_width/",
+    "dependencies": {
+        "jquery": ">=1.8",
+        "ui.position": ">=1.8"
+    }
+}
