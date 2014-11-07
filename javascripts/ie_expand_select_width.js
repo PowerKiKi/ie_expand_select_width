@@ -163,7 +163,11 @@
         else if (dom.currentStyle) {
             style = dom.currentStyle;
             for (var prop in style) {
-                result[prop] = style[prop];
+                try {
+                    result[prop] = style[prop];
+                }
+                catch (error) {
+                }
             }
         }
 
